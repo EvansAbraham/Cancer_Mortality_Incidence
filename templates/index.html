@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cancer Mortality and Incidence Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Cancer Mortality and Incidence Prediction</h1>
+    <form method="POST" action="/">
+        <label for="location">Enter Location:</label>
+        <input type="text" id="location" name="location" required>
+        <input type="submit" value="Predict">
+    </form>
+    {% if mortality and incidence %}
+    <div class="result">
+        <h2>Results:</h2>
+        <p>Mortality Rate: {{ mortality }}%</p>
+        <p>Incidence Rate: {{ incidence }}%</p>
+    </div>
+    {% elif error %}
+    <div class="error">
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+</body>
+</html>
