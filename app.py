@@ -76,9 +76,9 @@ def index():
         location = request.form['location']
 
         # Find the corresponding row in the mortality_data and incidence_data DataFrames
-        mortality_row = mortality_data[mortality_data['County'] == location]
-        incidence_row = incidence_data[incidence_data['County'] == location]
-
+        mortality_row = mortality_data[mortality_data['County'][1] == location]
+        incidence_row = incidence_data[incidence_data['County'][1] == location]
+        print(mortality_row)
         if not mortality_row.empty and not incidence_row.empty:
             # Get the features for prediction
             mortality_features = mortality_row[
@@ -117,4 +117,4 @@ if __name__ == '__main__':
     # Train the prediction models
     mortality_model, incidence_model = train_models(mortality_data, incidence_data)
 
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0',port=80)
